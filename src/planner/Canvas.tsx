@@ -147,10 +147,9 @@ export default function Canvas({
     setDrag(null);
   }
   const choose = (e: React.PointerEvent, s: Selection) => {
-    if (tool === "edit") {
-      e.stopPropagation();
-      onSelect(s);
-    } else down(e);
+    if (tool === "edit") onSelect(s);
+    // Keep pointer tracking active over filled shapes so two-finger zoom works there too.
+    down(e);
   };
   const selected = (kind: Selection["kind"], id: string) =>
     selection?.kind === kind && selection.id === id;

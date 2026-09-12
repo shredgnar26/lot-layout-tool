@@ -108,6 +108,8 @@ export default function App() {
       );
   }
   function start(next: Project) {
+    setAcres("");
+    setFeet("");
     commit(next);
     setScreen("plan");
     setTool("boundary");
