@@ -19,6 +19,7 @@ Your current project autosaves in this browser. Wait for “Saved on this device
 ```sh
 npm ci
 npm start
+npm run lint
 CI=true npm test -- --watchAll=false --runInBand
 npm run build
 ```

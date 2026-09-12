@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import "./App.css";
 import Canvas, { Selection, selectionPoints, Tool } from "./planner/Canvas";
-const MapPicker = lazy(() => import("./planner/MapPicker"));
 import {
   Point,
   Project,
@@ -39,6 +38,8 @@ import {
   exportProject,
   readBackground,
 } from "./planner/files";
+
+const MapPicker = lazy(() => import("./planner/MapPicker"));
 
 export default function App() {
   const [p, setP] = useState<Project>(freshProject),
@@ -358,7 +359,7 @@ export default function App() {
       <header>
         <a
           className="brand"
-          href="#"
+          href="/"
           onClick={(e) => {
             e.preventDefault();
             setScreen("home");

@@ -213,14 +213,16 @@ export function generateLots(p: Project): Lot[] {
             throw new Error(
               "This concept exceeds 300 lots. Increase target lot size or plan a smaller tract.",
             );
+          const clipRegion = remaining,
+            stripStart = start;
           const candidate = (end: number, reach = depth) =>
             intersect(
-              remaining,
+              clipRegion,
               polygon([
-                at(start, 0),
+                at(stripStart, 0),
                 at(end, 0),
                 at(end, reach),
-                at(start, reach),
+                at(stripStart, reach),
               ]),
             );
           let lo = Math.min(len, start + minWidth),

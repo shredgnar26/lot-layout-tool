@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prestart": "node scripts/copy-worker.cjs",
-    "prebuild": "node scripts/copy-worker.cjs"
+    "prebuild": "node scripts/copy-worker.cjs",
+    "lint": "eslint src --ext .ts,.tsx --max-warnings 0"
   },
   "eslintConfig": {
     "extends": [

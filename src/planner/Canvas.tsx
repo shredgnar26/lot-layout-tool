@@ -270,14 +270,10 @@ export default function Canvas({
                 strokeWidth={2 * units}
                 pointerEvents="none"
               >
-                {(b.right - b.x) / units < 65
-                  ? l.name.replace(/^Lot /, "")
-                  : l.name}
-                {(b.right - b.x) / units >= 65 && (
-                  <tspan x={(b.x + b.right) / 2} dy={15 * units}>
-                    {m.acres.toFixed(2)} ac{m.warnings.length ? " !" : ""}
-                  </tspan>
-                )}
+                {l.name.replace(/^Lot /, "").slice(0, 12)}
+                <title>
+                  {l.name} · {m.acres.toFixed(2)} acres
+                </title>
               </text>
             </g>
           );
