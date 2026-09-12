@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Point, Project, Shape } from "./model";
 import { bounds, dist, lotMetrics, polygon, roadMask } from "./geometry";
 export type Tool =
@@ -62,11 +62,21 @@ export default function Canvas({
   );
   const mask = useMemo(() => roadMask(p), [p]),
     points = selectionPoints(p, selection);
-  const rect = svgRef.current?.getBoundingClientRect();
-  const units = Math.max(
-    view.w / (rect?.width || 800),
-    view.h / (rect?.height || 450),
-  );
+  const [viewport, setViewport] = useState({ width: 800, height: 450 });
+  useEffect(() => {
+    const node = svgRef.current;
+    if (!node) return;
+    const update = () => {
+      const rect = node.getBoundingClientRect();
+      setViewport({ width: rect.width || 800, height: rect.height || 450 });
+    };
+    update();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(update);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [svgRef]);
+  const units = Math.max(view.w / viewport.width, view.h / viewport.height);
   const metrics = useMemo(
     () => new Map(p.lots.map((l) => [l.id, lotMetrics(l, p, mask)])),
     [p, mask],
